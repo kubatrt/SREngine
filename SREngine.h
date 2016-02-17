@@ -7,21 +7,12 @@
 
 namespace SREngine
 {
+    const int PREFFERED_SCREEN_WIDTH = 1024;
+    const int PREFFERED_SCREEN_HEIGHT = 786;
 
     enum class EventType { Focus, Resize };
 
     enum class InputType { Keyboard, Mouse };
-
-    class CApplication
-    {
-    public:
-        virtual void OnStartup() = 0;
-        virtual void OnShutdown() = 0;
-        virtual void OnUpdate(float deltaTime) = 0;
-        virtual void OnDraw() = 0;
-        virtual void OnInput(InputType type, void* input) = 0;
-        virtual void OnEvent(EventType type, void* event) = 0;
-    };
 
 }
 

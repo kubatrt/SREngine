@@ -1,11 +1,16 @@
 #include <iostream>
 #include <memory>
 #include "SREngine.h"
+#include "Application.hpp"
 
 using namespace std;
 
-class MyApplication : public SREngine::CApplication
+class Game : public SREngine::CApplication
 {
+private:
+    Game(const Game&) = delete;
+    Game& operator= (const Game&) = delete;
+
 public:
     virtual void OnStartup() {  cout << "OnStartup!" << endl; }
     virtual void OnShutdown() { cout << "OnShutdown!" << endl; }
@@ -17,7 +22,7 @@ public:
 
 std::unique_ptr<SREngine::CApplication> CreateApplication()
 {
-    return std::unique_ptr<MyApplication>();
+    return std::unique_ptr<Game>();
 }
 
 int main()
@@ -26,7 +31,7 @@ int main()
 
     std::unique_ptr<SREngine::CApplication>  app(CreateApplication());
 
-    app->OnStartup();
+    app->OnStartup();   // SEGV
 
     float dt = 0;
     bool run = false;
