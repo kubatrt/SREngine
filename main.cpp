@@ -2,16 +2,20 @@
 #include <memory>
 #include "SREngine.h"
 #include "Application.hpp"
+#include "Singleton.hpp"
 
 using namespace std;
 
-class Game : public SREngine::CApplication
+namespace SRE = SREngine;
+
+class Game : public SREngine::CApplication  //, SRE::Singleton<Game>
 {
-private:
+public:
+    Game() {}
     Game(const Game&) = delete;
     Game& operator= (const Game&) = delete;
 
-public:
+
     virtual void OnStartup() {  cout << "OnStartup!" << endl; }
     virtual void OnShutdown() { cout << "OnShutdown!" << endl; }
     virtual void OnUpdate(float deltaTime) {}
@@ -29,7 +33,7 @@ int main()
 {
     cout << "Hello, SREngine!" << endl;
 
-    std::unique_ptr<SREngine::CApplication>  app(CreateApplication());
+    SRE::CApplication* app = new Game();
 
     app->OnStartup();   // SEGV
 
@@ -42,6 +46,7 @@ int main()
     }
 
     app->OnShutdown();
+    delete app;
 
     return 0;
 }

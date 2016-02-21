@@ -9,7 +9,8 @@
 
 namespace SREngine {
 
-    class CApplication {
+    class CApplication
+    {
     public:
         virtual void OnStartup() = 0;
 
